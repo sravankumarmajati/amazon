@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Code.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">amazon</a> &gt; <a href="index.source.html" class="el_package">ac.app.base.constant</a> &gt; <span class="el_source">Code.java</span></div><h1>Code.java</h1><pre class="source lang-java linenums">package ac.app.base.constant;
+
+<span class="nc" id="L3">public enum Code {</span>
+    //通用部分
+<span class="nc" id="L5">    SUCCESS(0, &quot;success&quot;),</span>
+
+    // 内部错误 4000 开头
+<span class="nc" id="L8">    CONTRACT_INVOKE_ERROR(4000, &quot;contract invoke failed&quot;),</span>
+<span class="nc" id="L9">    BLOCK_QUERY_ERROR(4001, &quot;block query failed&quot;),</span>
+<span class="nc" id="L10">    TRANSACTION_QUERY_ERROR(4002, &quot;transaction query failed&quot;),</span>
+<span class="nc" id="L11">    POST_DATA_ERROR(4003, &quot;post data failed&quot;),</span>
+<span class="nc" id="L12">    NODE_INFO_NOT_FOUND(5201, &quot;node info not found&quot;),</span>
+<span class="nc" id="L13">    PREDATA_NOT_FOUND(4004, &quot;pre data not found&quot;),</span>
+
+<span class="nc" id="L15">    TX_UNSIGNED(4005, &quot;unsigned&quot;),</span>
+<span class="nc" id="L16">    DEPLOY_FAILED(4006, &quot;deployed&quot;),</span>
+
+    // 用户请求非法 9000开头
+<span class="nc" id="L19">    INVALID_PARAM_ERROR(9200, &quot;invalid param&quot;),</span>
+<span class="nc" id="L20">    INVALID_PARAM_LENGTH(9201, &quot;invalid param length&quot;),</span>
+<span class="nc" id="L21">    INVALID_PARAM_FORMAT(9202, &quot;invalid param format&quot;),</span>
+
+<span class="nc" id="L23">    NOT_FOUND(9404, &quot;resource not found&quot;),</span>
+<span class="nc" id="L24">    METHOD_NOT_SUPPORT(9405, &quot;method not support&quot;),</span>
+
+    // 授权非法
+<span class="nc" id="L27">    AUTH_ERROR(9300, &quot;permission deny&quot;),</span>
+<span class="nc" id="L28">    AUTH_FORBID(9300, &quot;access forbid&quot;),</span>
+<span class="nc" id="L29">    AUTH_VERIFY_ERROR(9300, &quot;access permission verify failed&quot;),</span>
+
+    // 未知错误
+<span class="nc" id="L32">    UNKNOWN_ERROR(9999, &quot;system error&quot;);</span>
+
+    private int code;
+    private String msg;
+
+    // 构造方法
+<span class="nc" id="L38">    Code(int code, String msg) {</span>
+<span class="nc" id="L39">        this.code = code;</span>
+<span class="nc" id="L40">        this.msg = msg;</span>
+<span class="nc" id="L41">    }</span>
+
+    public String getMsg() {
+<span class="nc" id="L44">        return msg;</span>
+    }
+
+    public void setMsg(String msg) {
+<span class="nc" id="L48">        this.msg = msg;</span>
+<span class="nc" id="L49">    }</span>
+
+    public int getCode() {
+<span class="nc" id="L52">        return code;</span>
+    }
+
+    public void setCode(int code) {
+<span class="nc" id="L56">        this.code = code;</span>
+<span class="nc" id="L57">    }</span>
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>StudentServiceImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">amazon</a> &gt; <a href="index.source.html" class="el_package">ac.app.service.impl</a> &gt; <span class="el_source">StudentServiceImpl.java</span></div><h1>StudentServiceImpl.java</h1><pre class="source lang-java linenums">package ac.app.service.impl;
+
+import ac.app.contract.student.logic.entity.Student;
+import ac.app.contract.student.logic.entity.StudentResult;
+import ac.app.dao.StudentContractDao;
+import ac.app.service.StudentService;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+<span class="nc" id="L15">public class StudentServiceImpl implements StudentService {</span>
+
+    @Autowired
+    StudentContractDao studentContractDao;
+
+
+    @Override public boolean registerStudent(Student student) {
+        // get Contract Address
+<span class="nc" id="L23">        List&lt;Student&gt; students = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L24">        students.add(student);</span>
+
+<span class="nc" id="L26">        return studentContractDao.registerStudent(students);</span>
+    }
+
+    @Override
+    public boolean changeStudent(Student student) {
+<span class="nc" id="L31">        return studentContractDao.changeStudent(student);</span>
+    }
+
+    @Override
+    public Student getStudent(String id) {
+<span class="nc" id="L36">        return studentContractDao.getStudent(id);</span>
+    }
+
+    @Override
+    public List&lt;Student&gt; getStudents(List&lt;String&gt; ids) {
+<span class="nc" id="L41">        return studentContractDao.getStudents(ids);</span>
+    }
+
+    @Override
+    public StudentResult isContains(Student student) {
+<span class="nc" id="L46">        return studentContractDao.isContains(student);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

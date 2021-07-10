@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>StudentAPIController.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">amazon</a> &gt; <a href="index.source.html" class="el_package">ac.app.controller</a> &gt; <span class="el_source">StudentAPIController.java</span></div><h1>StudentAPIController.java</h1><pre class="source lang-java linenums">package ac.app.controller;
+
+import ac.app.base.constant.Code;
+import ac.app.base.response.BasicResult;
+import ac.app.contract.student.logic.entity.Student;
+import ac.app.contract.student.logic.entity.StudentResult;
+import ac.app.service.StudentService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
+
+@Controller
+@Api(value = &quot;student&quot;, description = &quot;学生信息 API&quot;)
+@RequestMapping(value = &quot;/v1&quot;)
+public class StudentAPIController {
+
+    private StudentService studentService;
+
+    @Autowired
+<span class="nc" id="L32">    public StudentAPIController(StudentService studentService) {</span>
+<span class="nc" id="L33">        this.studentService = studentService;</span>
+<span class="nc" id="L34">    }</span>
+
+    @ApiOperation(value = &quot;注册学生&quot;, notes = &quot;&quot;, response = Void.class, tags = {}, position = 0)
+    @ApiResponses(value = { @ApiResponse(code = 200, message = &quot;OK&quot;, response = Boolean.class) })
+    @RequestMapping(value = &quot;/reg_student&quot;,
+            produces = { &quot;application/json&quot; },
+            method = RequestMethod.POST)
+    public ResponseEntity&lt;BasicResult&gt; registerStudent(
+            @ApiParam(value = &quot;学生ID&quot;, required = true) @RequestBody Student student
+    ) {
+<span class="nc" id="L44">        boolean res = studentService.registerStudent(student);</span>
+<span class="nc" id="L45">        BasicResult&lt;Boolean&gt; br = new BasicResult&lt;&gt;(Code.SUCCESS, res);</span>
+<span class="nc" id="L46">        return new ResponseEntity&lt;&gt;(br, HttpStatus.OK);</span>
+    }
+
+    @ApiOperation(value = &quot;修改学生信息&quot;, notes = &quot;&quot;, response = Void.class, tags = {}, position = 1)
+    @ApiResponses(value = { @ApiResponse(code = 200, message = &quot;OK&quot;, response = Boolean.class) })
+    @RequestMapping(value = &quot;/change_student&quot;,
+            produces = { &quot;application/json&quot; },
+            method = RequestMethod.POST)
+    public ResponseEntity&lt;BasicResult&gt; changeStudent(
+            @ApiParam(value = &quot;学生ID&quot;, required = true) @RequestBody Student student
+    ) {
+<span class="nc" id="L57">        boolean res = studentService.changeStudent(student);</span>
+<span class="nc" id="L58">        BasicResult&lt;Boolean&gt; br = new BasicResult&lt;&gt;(Code.SUCCESS, res);</span>
+<span class="nc" id="L59">        return new ResponseEntity&lt;&gt;(br, HttpStatus.OK);</span>
+    }
+
+    @ApiOperation(value = &quot;获取学生信息&quot;, notes = &quot;&quot;, response = Void.class, tags = {}, position = 2)
+    @ApiResponses(value = { @ApiResponse(code = 200, message = &quot;OK&quot;, response = Boolean.class) })
+    @RequestMapping(value = &quot;/get_student&quot;,
+            produces = { &quot;application/json&quot; },
+            method = RequestMethod.POST)
+    public ResponseEntity&lt;BasicResult&gt; getStudent(
+            @ApiParam(value = &quot;学生ID&quot;, required = true) @RequestBody String id
+    ) {
+<span class="nc" id="L70">        Student res = studentService.getStudent(id);</span>
+<span class="nc" id="L71">        BasicResult&lt;Student&gt; br = new BasicResult&lt;&gt;(Code.SUCCESS, res);</span>
+<span class="nc" id="L72">        return new ResponseEntity&lt;&gt;(br, HttpStatus.OK);</span>
+    }
+
+    @ApiOperation(value = &quot;批量获取学生信息&quot;, notes = &quot;&quot;, response = Void.class, tags = {}, position = 3)
+    @ApiResponses(value = { @ApiResponse(code = 200, message = &quot;OK&quot;, response = Boolean.class) })
+    @RequestMapping(value = &quot;/get_students&quot;,
+            produces = { &quot;application/json&quot; },
+            method = RequestMethod.POST)
+    public ResponseEntity&lt;BasicResult&gt; getStudents(
+            @ApiParam(value = &quot;学生IDs&quot;, required = true) @RequestBody List&lt;String&gt; ids
+            ) {
+<span class="nc" id="L83">        List&lt;Student&gt; res = studentService.getStudents(ids);</span>
+<span class="nc" id="L84">        BasicResult&lt;List&gt; br = new BasicResult&lt;&gt;(Code.SUCCESS, res);</span>
+<span class="nc" id="L85">        return new ResponseEntity&lt;&gt;(br, HttpStatus.OK);</span>
+    }
+
+    @ApiOperation(value = &quot;是否包含学生&quot;, notes = &quot;&quot;, response = Void.class, tags = {}, position = 4)
+    @ApiResponses(value = { @ApiResponse(code = 200, message = &quot;OK&quot;, response = Boolean.class) })
+    @RequestMapping(value = &quot;/is_contains&quot;,
+            produces = { &quot;application/json&quot; },
+            method = RequestMethod.POST)
+    public ResponseEntity&lt;BasicResult&gt; idContains(
+            @ApiParam(value = &quot;学生ID&quot;, required = true) @RequestBody Student student
+    ) {
+<span class="nc" id="L96">        StudentResult res = studentService.isContains(student);</span>
+<span class="nc" id="L97">        BasicResult&lt;StudentResult&gt; br = new BasicResult&lt;&gt;(Code.SUCCESS, res);</span>
+<span class="nc" id="L98">        return new ResponseEntity&lt;&gt;(br, HttpStatus.OK);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

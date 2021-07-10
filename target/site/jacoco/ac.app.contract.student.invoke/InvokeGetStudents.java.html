@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>InvokeGetStudents.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">amazon</a> &gt; <a href="index.source.html" class="el_package">ac.app.contract.student.invoke</a> &gt; <span class="el_source">InvokeGetStudents.java</span></div><h1>InvokeGetStudents.java</h1><pre class="source lang-java linenums">package ac.app.contract.student.invoke;
+
+import ac.app.contract.student.logic.IStudent;
+import ac.app.contract.student.logic.entity.Student;
+import cn.hyperchain.contract.BaseInvoke;
+
+import java.util.List;
+
+public class InvokeGetStudents implements BaseInvoke&lt;List&lt;Student&gt;, IStudent&gt; {
+
+    private List&lt;String&gt; ids;
+
+<span class="nc" id="L13">    public InvokeGetStudents() {}</span>
+
+<span class="nc" id="L15">    public InvokeGetStudents(List&lt;String&gt; ids) {</span>
+<span class="nc" id="L16">        this.ids = ids;</span>
+<span class="nc" id="L17">    }</span>
+
+    @Override public List&lt;Student&gt; invoke(IStudent iStudent) {
+<span class="nc" id="L20">        return iStudent.getStudents(ids);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

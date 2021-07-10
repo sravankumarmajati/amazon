@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BasicResult.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">amazon</a> &gt; <a href="index.source.html" class="el_package">ac.app.base.response</a> &gt; <span class="el_source">BasicResult.java</span></div><h1>BasicResult.java</h1><pre class="source lang-java linenums">package ac.app.base.response;
+
+import ac.app.base.constant.Code;
+import io.swagger.annotations.ApiModelProperty;
+
+import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public final class BasicResult&lt;T&gt; {
+    @JsonProperty(&quot;code&quot;)
+    private int code;
+    @JsonProperty(&quot;message&quot;)
+    private String message;
+<span class="nc" id="L15">    @JsonProperty(&quot;data&quot;)</span>
+    private T data = null;
+
+<span class="nc" id="L18">    public BasicResult() {</span>
+<span class="nc" id="L19">        this.data = null;</span>
+<span class="nc" id="L20">    }</span>
+
+<span class="nc" id="L22">    public BasicResult(Code code) {</span>
+<span class="nc" id="L23">        this.code = code.getCode();</span>
+<span class="nc" id="L24">        this.message = code.getMsg();</span>
+<span class="nc" id="L25">    }</span>
+
+<span class="nc" id="L27">    public BasicResult(Code code, T data) {</span>
+<span class="nc" id="L28">        this.code = code.getCode();</span>
+<span class="nc" id="L29">        this.message = code.getMsg();</span>
+<span class="nc" id="L30">        this.data = data;</span>
+<span class="nc" id="L31">    }</span>
+
+<span class="nc" id="L33">    public BasicResult(Code code, String msg, T data) {</span>
+<span class="nc" id="L34">        this.code = code.getCode();</span>
+<span class="nc" id="L35">        this.message = msg;</span>
+<span class="nc" id="L36">        this.data = data;</span>
+<span class="nc" id="L37">    }</span>
+
+    @ApiModelProperty(value = &quot;&quot;)
+
+    public int getCode() {
+<span class="nc" id="L42">        return code;</span>
+    }
+
+    public void setCode(int code) {
+<span class="nc" id="L46">        this.code = code;</span>
+<span class="nc" id="L47">    }</span>
+
+    public String getMessage() {
+<span class="nc" id="L50">        return message;</span>
+    }
+
+    public void setMessage(String message) {
+<span class="nc" id="L54">        this.message = message;</span>
+<span class="nc" id="L55">    }</span>
+
+    public T getData() {
+<span class="nc" id="L58">        return data;</span>
+    }
+
+    public void setData(T data) {
+<span class="nc" id="L62">        this.data = data;</span>
+<span class="nc" id="L63">    }</span>
+
+    @Override
+    public boolean equals(java.lang.Object o) {
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L68">            return true;</span>
+        }
+<span class="nc bnc" id="L70" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L71">            return false;</span>
+        }
+        //TODO
+<span class="nc" id="L74">        return true;</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L79">        return Objects.hash(code, message, data);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L84">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L85">        sb.append(&quot;class BasicReturn {\n&quot;);</span>
+
+<span class="nc" id="L87">        sb.append(&quot;    code: &quot;).append(toIndentedString(code)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L88">        sb.append(&quot;    message: &quot;).append(toIndentedString(message)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L89">        sb.append(&quot;    data: &quot;).append(toIndentedString(data)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L90">        sb.append(&quot;}&quot;);</span>
+<span class="nc" id="L91">        return sb.toString();</span>
+    }
+
+    /**
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
+    private String toIndentedString(java.lang.Object o) {
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        if (o == null) {</span>
+<span class="nc" id="L100">            return &quot;null&quot;;</span>
+        }
+<span class="nc" id="L102">        return o.toString().replace(&quot;\n&quot;, &quot;\n    &quot;);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ContractUtil.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">amazon</a> &gt; <a href="index.source.html" class="el_package">ac.app.util</a> &gt; <span class="el_source">ContractUtil.java</span></div><h1>ContractUtil.java</h1><pre class="source lang-java linenums">package ac.app.util;
+
+import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+
+import cn.hyperchain.sdk.account.Account;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
+<span class="nc" id="L13">public class ContractUtil {</span>
+<span class="nc" id="L14">    private Map&lt;String, String&gt; memCAddrs = new HashMap&lt;&gt;();</span>
+
+<span class="nc" id="L16">    private Properties prop = new Properties();</span>
+
+
+    @Value(&quot;${dev.contract.name}&quot;)
+    public String ContractName;
+
+    @Value(&quot;${dev.contract.jarname}&quot;)
+    public String ContractJarName;
+
+    @Value(&quot;${dev.contract.prop}&quot;)
+    public String contractPropPath;
+
+    @Value(&quot;${dev.contract.account}&quot;)
+    public String defaultAccountJson;
+
+    @Value(&quot;${dev.contract.accountpwd}&quot;)
+    public String defaultAccountJsonPwd;
+
+<span class="nc" id="L34">    public Account defaultAccount = null;</span>
+
+<span class="nc" id="L36">    private InputStream propReader = null;</span>
+//    private FileWriter propWriter = null;
+
+    public void init(){
+        try {
+<span class="nc" id="L41">           propReader = ContractUtil.class.getClassLoader().getResourceAsStream(contractPropPath);</span>
+//           propWriter =  new FileWriter(new File(contractPropPath));
+<span class="nc" id="L43">           defaultAccount = new Account(defaultAccountJson);</span>
+<span class="nc" id="L44">           prop.load(propReader);</span>
+<span class="nc" id="L45">        } catch (Exception e) {</span>
+<span class="nc" id="L46">            e.printStackTrace();</span>
+<span class="nc" id="L47">        }</span>
+<span class="nc" id="L48">    }</span>
+    /**
+     * @param key
+     * @param address
+     * @param persist
+     * @return
+     */
+    public void setContractAddress(String key, String address, boolean persist) {
+<span class="nc" id="L56">        memCAddrs.put(key, address);</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        if (persist) {</span>
+<span class="nc" id="L58">            prop.setProperty(key, address);</span>
+        }
+//        try {
+//            prop.store(propWriter, &quot;Contract Address properties&quot;);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+<span class="nc" id="L65">    }</span>
+
+    /**
+     * @param key
+     * @param persist_first
+     * @return
+     */
+    public String getContractAddress(String key, boolean persist_first) {
+<span class="nc" id="L73">        String val = null;</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (persist_first) {</span>
+<span class="nc" id="L75">            val = prop.getProperty(key);</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">            if (val != null) {</span>
+<span class="nc" id="L77">                return val;</span>
+            }
+        }
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if (memCAddrs.containsKey(key)) {</span>
+<span class="nc" id="L81">            return memCAddrs.get(key);</span>
+        }
+<span class="nc" id="L83">        return prop.getProperty(key);</span>
+    }
+
+    public Account getDefaultAccount(){
+<span class="nc" id="L87">        return defaultAccount;</span>
+    }
+
+    public String getContractName() {
+<span class="nc" id="L91">        return ContractName;</span>
+    }
+
+    public String getContractJarName() {
+<span class="nc" id="L95">        return ContractJarName;</span>
+    }
+
+    public String getContractPropPath() {
+<span class="nc" id="L99">        return contractPropPath;</span>
+    }
+
+    public String getDefaultAccountJson() {
+<span class="nc" id="L103">        return defaultAccountJson;</span>
+    }
+
+    public String getDefaultAccountJsonPwd() {
+<span class="nc" id="L107">        return defaultAccountJsonPwd;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

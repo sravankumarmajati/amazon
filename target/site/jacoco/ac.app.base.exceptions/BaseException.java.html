@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BaseException.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">amazon</a> &gt; <a href="index.source.html" class="el_package">ac.app.base.exceptions</a> &gt; <span class="el_source">BaseException.java</span></div><h1>BaseException.java</h1><pre class="source lang-java linenums">package ac.app.base.exceptions;
+
+import ac.app.base.constant.Code;
+import ac.app.base.response.BasicResult;
+
+/**
+ * 所有自定义的Exception，需要集成BaseException
+ * 需要继承 RuntimeException 否则将无法回滚事务
+ */
+public class BaseException extends RuntimeException {
+    private int codeInt;
+    private String msg;
+    private BasicResult baseResult;
+
+    public BaseException(Code code) {
+<span class="nc" id="L16">        super(code.getMsg());</span>
+<span class="nc" id="L17">        this.baseResult = new BasicResult&lt;&gt;(code);</span>
+<span class="nc" id="L18">    }</span>
+
+    public BaseException(Code code, String msg) {
+<span class="nc" id="L21">        super(msg);</span>
+<span class="nc" id="L22">        this.baseResult = new BasicResult&lt;&gt;(code, msg);</span>
+<span class="nc" id="L23">    }</span>
+
+    public int getCodeInt() {
+<span class="nc" id="L26">        return codeInt;</span>
+    }
+
+    public void setCodeInt(int codeInt) {
+<span class="nc" id="L30">        this.codeInt = codeInt;</span>
+<span class="nc" id="L31">    }</span>
+
+    public String getMsg() {
+<span class="nc" id="L34">        return msg;</span>
+    }
+
+    public void setMsg(String msg) {
+<span class="nc" id="L38">        this.msg = msg;</span>
+<span class="nc" id="L39">    }</span>
+
+    public BasicResult getBaseResult() {
+<span class="nc" id="L42">        return baseResult;</span>
+    }
+
+    public void setBaseResult(BasicResult baseResult) {
+<span class="nc" id="L46">        this.baseResult = baseResult;</span>
+<span class="nc" id="L47">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
